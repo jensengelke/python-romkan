@@ -5,13 +5,19 @@ PACKAGE_NAME = 'romkan'
 
 PROJ_METADATA = '%s.json' % PROJ_NAME
 
-import os, json, imp
+import os, json, importlib as imp
+
+from importlib.util import spec_from_file_location, module_from_spec
 
 here = os.path.abspath(os.path.dirname(__file__))
 proj_info = json.loads(open(os.path.join(here, PROJ_METADATA)).read())
 README = open(os.path.join(here, 'README.rst')).read()
 CHANGELOG = open(os.path.join(here, 'CHANGELOG.rst')).read()
-VERSION = imp.load_source('version', os.path.join(here, 'src/%s/version.py' % PACKAGE_NAME)).__version__
+version_path = os.path.join(here, 'src', 'romkan', 'version.py')
+spec = spec_from_file_location("version", version_path)
+version_module = module_from_spec(spec)
+spec.loader.exec_module(version_module)
+VERSION = version_module.__version__
 
 from setuptools import setup, find_packages
 setup(
