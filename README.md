@@ -1,4 +1,9 @@
 # python-romkan
+Temp update to run with current python:
+```
+sudo python setup.py install
+```
+
 
 [![Build Status](https://api.travis-ci.org/soimort/python-romkan.png)](https://travis-ci.org/soimort/python-romkan) [![PyPI version](https://badge.fury.io/py/romkan.png)](http://badge.fury.io/py/romkan)
 
